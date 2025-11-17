@@ -13,10 +13,9 @@ import AIChat from "./components/AIChat"
 import QuizFlow from "./components/QuizFlow"
 import SignUp from "./components/SignUp"
 import Checkout from "./components/Checkout"
-import Login from "./components/Login"
 
 export default function Home() {
-  const [currentView, setCurrentView] = useState<"welcome" | "login" | "signup" | "onboarding" | "dashboard" | "scanner" | "nutrients" | "crisis" | "chat" | "quiz" | "checkout">("welcome")
+  const [currentView, setCurrentView] = useState<"welcome" | "signup" | "onboarding" | "dashboard" | "scanner" | "nutrients" | "crisis" | "chat" | "quiz" | "checkout">("welcome")
   const [userProfile, setUserProfile] = useState<any>(null)
   const [userData, setUserData] = useState<any>(null)
   const [hasCompletedOnboarding, setHasCompletedOnboarding] = useState(false)
@@ -38,15 +37,24 @@ export default function Home() {
     setCurrentView("dashboard")
   }
 
-  const handleLoginSuccess = () => {
-    // Simula usuário já com onboarding completo
-    setHasCompletedOnboarding(true)
-    setUserProfile({ name: "Usuário", email: "usuario@email.com" })
-    setCurrentView("dashboard")
+  if (currentView === "checkout") {
+    return <Checkout onBack={() => setCurrentView("welcome")} />
   }
 
-  if (currentView === "login") {
-    return <Login onBack={() => setCurrentView("welcome")} onLoginSuccess={handleLoginSuccess} />
+  if (currentView === "checkout") {
+    return <Checkout onBack={() => setCurrentView("welcome")} />
+  }
+
+  if (currentView === "checkout") {
+    return <Checkout onBack={() => setCurrentView("welcome")} />
+  }
+
+  if (currentView === "checkout") {
+    return <Checkout onBack={() => setCurrentView("welcome")} />
+  }
+
+  if (currentView === "checkout") {
+    return <Checkout onBack={() => setCurrentView("welcome")} />
   }
 
   if (currentView === "checkout") {
@@ -109,12 +117,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="gap-2"
-                onClick={() => setCurrentView("login")}
-              >
+              <Button variant="outline" size="sm" className="gap-2">
                 <User className="w-4 h-4" />
                 Entrar
               </Button>
